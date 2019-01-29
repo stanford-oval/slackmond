@@ -1,0 +1,9 @@
+{
+  "name": "slackmond",
+  "version": "0.0.1",
+  "description": "Slack-Almond bridge",
+  "main": "main.js",
+  "repository": "https://github.com/Stanford-Mobisocial-IoT-Lab/slackmond",
+  "author": "Giovanni Campagna <gcampagn@cs.stanford.edu>",
+  "license": "GPL-3.0+"
+}
