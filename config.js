@@ -1,4 +1,7 @@
-module.exports.DATABASE_URL = process.env.DATABASE_URL || 'mysql://thingengine:thingengine@localhost/thingengine?charset=utf8mb4_bin';
+module.exports.WEB_ALMOND_URL = 'https://almond.stanford.edu';
+module.exports.THINGPEDIA_URL = module.exports.WEB_ALMOND_URL + '/thingpedia';
+
+module.exports.DATABASE_URL = process.env.DATABASE_URL || 'mysql://slackmond:slackmond@localhost/slackmond?charset=utf8mb4_bin';
 
 module.exports.ALMOND_CLIENT_ID = process.env.ALMOND_CLIENT_ID || null;
 

@@ -1,0 +1,17 @@
+branches:
+  except:
+  - "/^wip/"
+language: node_js
+sudo: true
+dist: xenial
+addons:
+  mariadb: '10.2'
+node_js:
+- '8'
+before_script:
+- mysql -u root -e "create database if not exists slackmond_test; grant all privileges
+  on slackmond_test.* to 'slackmond'@'%' identified by 'slackmond';"
+script:
+- yarn lint
+- yarn test
+after_success: yarn run coverage

@@ -10,5 +10,15 @@
     "@slack/client": "^4.8.0",
     "@slack/events-api": "^2.1.1",
     "mysql": "^2.16.0"
+  },
+  "scripts": {
+    "lint": "eslint almond/ browser/ model/ routes/ util/ stanford/ training/ config.js main.js frontend.js",
+    "test": "nyc ./tests/everything.sh",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "eslint": "^5.12.1",
+    "nyc": "^13.1.0"
   }
 }
