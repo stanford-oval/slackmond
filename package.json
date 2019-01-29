@@ -8,6 +8,7 @@
   "license": "GPL-3.0+",
   "dependencies": {
     "@slack/client": "^4.8.0",
-    "@slack/events-api": "^2.1.1"
+    "@slack/events-api": "^2.1.1",
+    "mysql": "^2.16.0"
   }
 }
