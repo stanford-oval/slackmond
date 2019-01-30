@@ -15,4 +15,6 @@ node $srcdir/tests/unit
 # (these spawn the whole system, with all the bells and whistles,
 # and fire requests at it, checking the result)
 
-$srcdir/tests/integration.sh
+# we cannot quite run these because they talk to Slack and
+# potentially interfere with a running app
+#$srcdir/tests/integration.sh
