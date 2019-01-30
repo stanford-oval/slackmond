@@ -111,7 +111,6 @@ module.exports = {
     },
 
     withTransaction(transaction, isolationLevel = 'serializable') {
-        dbTransactionTotal.inc();
         return connect().then(async ([client, done]) => {
             // danger! we're pasting strings into SQL
             // this is ok because the argument NEVER comes from user input

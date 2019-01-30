@@ -11,8 +11,6 @@
 
 const db = require('../util/db');
 
-const nshards = require('../config').THINGENGINE_MANAGER_ADDRESS.length;
-
 function create(client, user) {
     return db.insertOne(client, `insert into users set ?`, [user]).then((id) => {
         user.id = id;
@@ -29,8 +27,12 @@ module.exports = {
         return db.selectAll(client, "select u.* from users u where username = ?", [username]);
     },
 
-    getByCloudId(client, cloudId) {
-        return db.selectAll(client, "select u.* from users u where cloud_id = ?", [cloudId]);
+    getByAlmondId(client, cloudId) {
+        return db.selectAll(client, "select u.* from users u where almond_id = ?", [cloudId]);
+    },
+
+    getBySlackId(client, userId) {
+        return db.selectAll(client, "select u.* from users u where slack_id = ?", [userId]);
     },
 
     create,

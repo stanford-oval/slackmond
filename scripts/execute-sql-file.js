@@ -15,9 +15,11 @@ const Url = require('url');
 const util = require('util');
 const fs = require('fs');
 
+const Config = require('../config');
+
 async function main() {
     try {
-        const parsed = Url.parse(process.env.DATABASE_URL);
+        const parsed = Url.parse(Config.DATABASE_URL);
         const [user, pass] = parsed.auth.split(':');
 
         const argv = [

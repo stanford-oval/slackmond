@@ -1,4 +1,8 @@
-module.exports.WEB_ALMOND_URL = 'https://almond.stanford.edu';
+"use strict";
+
+module.exports.SERVER_ORIGIN = process.env.SERVER_ORIGIN || 'http://127.0.0.1:8090';
+
+module.exports.WEB_ALMOND_URL = process.env.WEB_ALMOND_URL || 'https://almond.stanford.edu';
 module.exports.THINGPEDIA_URL = module.exports.WEB_ALMOND_URL + '/thingpedia';
 
 module.exports.DATABASE_URL = process.env.DATABASE_URL || 'mysql://slackmond:slackmond@localhost/slackmond?charset=utf8mb4_bin';

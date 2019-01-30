@@ -18,13 +18,15 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slack_id` varchar(255) COLLATE utf8_bin NOT NULL, 
   `username` varchar(255) COLLATE utf8_bin NOT NULL,
-  `cloud_id` char(64) COLLATE utf8_bin NOT NULL,
-  `refresh_token` varchar(255) COLLATE utf8_bin NOT NULL,
-  `access_token` varchar(255) COLLATE utf8_bin NOT NULL,
+  `human_name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `almond_id` varchar(64) COLLATE utf8_bin NULL,
+  `refresh_token` varchar(2048) COLLATE utf8_bin NULL,
+  `access_token` varchar(2048) COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `cloud_id` (`cloud_id`),
+  UNIQUE KEY `slack_id` (`slack_id`),
+  UNIQUE KEY `almond_id` (`almond_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
