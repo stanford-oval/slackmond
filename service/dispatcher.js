@@ -189,6 +189,7 @@ class UserContext extends events.EventEmitter {
                 case 'picture':
                     await this._webClient.chat.postMessage({
                         channel: this._channel,
+                        as_user: true,
                         text: '',
                         attachments: [{
                             fallback: "Almond sends a picture: " + message.url,
@@ -200,6 +201,7 @@ class UserContext extends events.EventEmitter {
                 case 'rdl':
                     await this._webClient.chat.postMessage({
                         channel: this._channel,
+                        as_user: true,
                         text: '',
                         attachments: [{
                             fallback: message.rdl.displayTitle,
@@ -233,6 +235,7 @@ class UserContext extends events.EventEmitter {
                         text = "Log in to Web Almond";
                     await this._webClient.chat.postMessage({
                         channel: this._channel,
+                        as_user: true,
                         text: '',
                         attachments: [{
                             fallback: message.title + " at " + message.url,
