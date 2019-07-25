@@ -32,7 +32,7 @@ class UserContext extends events.EventEmitter {
         console.log(`Created user context with ID ${this._id}`);
 
         this._client = rtmClient;
-        this._webClient = webClient;
+        this._webClient = webClient;    
         this._user = user;
         this._channel = channel;
         this._options = options || {};
@@ -73,6 +73,9 @@ class UserContext extends events.EventEmitter {
 
         console.log(`Context ${this._id}: queued Almond input`, message);
         this._incomingMessageQueue.push({ message, activate });
+        console.log(message);
+        console.log(activate);
+        console.log(`Message pushed!`);
     }
 
     close() {
@@ -112,8 +115,7 @@ class UserContext extends events.EventEmitter {
             });
 
             this._user.access_token = refreshed.access_token;
-            if (refreshed.refresh_token)
-                this._user.refresh_token = refreshed.refresh_token;
+            this._user.refresh_token = refreshed.refresh_token;
         }
     }
 
@@ -132,7 +134,14 @@ class UserContext extends events.EventEmitter {
         if (this._user.access_token)
             headers['Authorization'] = `Bearer ${this._user.access_token}`;
 
+        let tempToken = this._user.access_token;
+        console.log();
+        console.log(`${tempToken}`);
+        console.log();  
+        headers['Authorization'] = `Bearer ` + tempToken;
+        console.log()
         this._ws = new WebSocket(url, [], { headers });
+        
         this._ws.on('close', () => {
             console.log(`Context ${this._id}: closed`);
             this._ws = null;
@@ -147,7 +156,8 @@ class UserContext extends events.EventEmitter {
             // (and discarding it)
             this._pumpingIncomingMessages = false;
         });
-        this._ws.on('message', (data) => {
+        this._ws.on('message', (data) => { //Never gets here
+            console.log("Message received from Almond!");
             const message = JSON.parse(data);
             this._outgoingMessageQueue.push(message);
         });
@@ -179,6 +189,7 @@ class UserContext extends events.EventEmitter {
         // TODO: consecutive messages (up to ask special) should be collapsed into a single rich
         // slack message
         for (;;) {
+            console.log(`Waiting for message from OMQ`);
             let message = await this._outgoingMessageQueue.pop();
             try {
                 switch (message.type) {
