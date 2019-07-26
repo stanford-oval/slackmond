@@ -1,4 +1,4 @@
-// -*- mode: js; indent-tabs-mode: nil; js-basic-offset: 4 -*-
+    // -*- mode: js; indent-tabs-mode: nil; js-basic-offset: 4 -*-
 //
 // This file is part of slackmond
 //
@@ -161,6 +161,7 @@ class UserContext extends events.EventEmitter {
             const message = JSON.parse(data);
             this._outgoingMessageQueue.push(message);
         });
+        this._ws.close;
     }
 
     _escapeMessageText(text) {
