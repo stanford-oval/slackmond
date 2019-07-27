@@ -121,6 +121,8 @@ class UserContext extends events.EventEmitter {
 
     async _doConnect() {
         const options = { id: this._id };
+        var close = true;
+
         if (!this._options.showWelcome)
             options.hide_welcome = '1';
 
@@ -142,8 +144,10 @@ class UserContext extends events.EventEmitter {
         console.log()
         this._ws = new WebSocket(url, [], { headers });
         
+        
         this._ws.on('close', () => {
             console.log(`Context ${this._id}: closed`);
+            close = false;
             this._ws = null;
         });
         this._ws.on('error', (e) => {
@@ -161,7 +165,10 @@ class UserContext extends events.EventEmitter {
             const message = JSON.parse(data);
             this._outgoingMessageQueue.push(message);
         });
-        this._ws.close;
+
+        if (close) {
+            this._ws.close;
+        }
     }
 
     _escapeMessageText(text) {
