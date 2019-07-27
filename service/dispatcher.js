@@ -75,7 +75,6 @@ class UserContext extends events.EventEmitter {
         this._incomingMessageQueue.push({ message, activate });
         console.log(message);
         console.log(activate);
-        console.log(`Message pushed!`);
     }
 
     close() {
@@ -137,19 +136,13 @@ class UserContext extends events.EventEmitter {
             headers['Authorization'] = `Bearer ${this._user.access_token}`;
 
         let tempToken = this._user.access_token;
-        console.log();
-        console.log(`${tempToken}`);
-        console.log();
         headers['Authorization'] = `Bearer ` + tempToken;
-        console.log()
 
         this._ws = new WebSocket(url, [], { headers });
 
         this._ws.on('close', () => {
             console.log(`Context ${this._id}: closed`);
-            console.log("Boolean value:" + close);
             if (close) {
-//                this._ws = null;
                 close = false;
             }
         });
@@ -197,7 +190,6 @@ class UserContext extends events.EventEmitter {
         // TODO: consecutive messages (up to ask special) should be collapsed into a single rich
         // slack message
         for (; ;) {
-            console.log(`Waiting for message from OMQ`);
             let message = await this._outgoingMessageQueue.pop();
             try {
                 switch (message.type) {
