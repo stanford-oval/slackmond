@@ -1,4 +1,4 @@
-// -*- mode: js; indent-tabs-mode: nil; js-basic-offset: 4 -*-
+    // -*- mode: js; indent-tabs-mode: nil; js-basic-offset: 4 -*-
 //
 // This file is part of slackmond
 //
@@ -79,7 +79,7 @@ class UserContext extends events.EventEmitter {
 
     close() {
         this._closed = true;
-        if (this._ws != null) {
+        if (this._ws !== null) {
             this._ws.close();
         } else {
             console.log("No websocket to close. ");
@@ -135,8 +135,6 @@ class UserContext extends events.EventEmitter {
         const headers = {
             'Origin': Config.WEB_ALMOND_URL
         };
-        if (this._user.access_token)
-            headers['Authorization'] = `Bearer ${this._user.access_token}`;
 
         let tempToken = this._user.access_token;
         headers['Authorization'] = `Bearer ` + tempToken;
@@ -145,7 +143,7 @@ class UserContext extends events.EventEmitter {
 
         this._ws.on('close', () => {
             console.log(`Context ${this._id}: closed`);
-            if (this._ws != null) {
+            if (this._ws !== null) {
                 this._ws = null;
             } else {
                 console.log('No Websocket.');
