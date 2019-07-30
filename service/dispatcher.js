@@ -79,7 +79,11 @@ class UserContext extends events.EventEmitter {
 
     close() {
         this._closed = true;
-        this._ws.close();
+        if (this._ws != null) {
+            this._ws.close();
+        } else {
+            console.log("No websocket to close. ");
+        }
     }
 
     _connect() {
@@ -120,7 +124,6 @@ class UserContext extends events.EventEmitter {
 
     async _doConnect() {
         const options = { id: this._id };
-        var close = true;
 
         if (!this._options.showWelcome)
             options.hide_welcome = '1';
@@ -142,8 +145,10 @@ class UserContext extends events.EventEmitter {
 
         this._ws.on('close', () => {
             console.log(`Context ${this._id}: closed`);
-            if (close) {
-                close = false;
+            if (this._ws != null) {
+                this._ws = null;
+            } else {
+                console.log('No Websocket.');
             }
         });
         this._ws.on('error', (e) => {
@@ -154,7 +159,6 @@ class UserContext extends events.EventEmitter {
             // wait to process incoming messages until we get the first ask_special
             // this ensures that almond does not get confused by processing a message during initialization
             // (and discarding it)
-            close = true;
             this._pumpingIncomingMessages = false;
         });
         this._ws.on('message', (data) => { //Never gets here
